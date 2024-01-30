@@ -1,0 +1,4 @@
+/node_modules
+.env
+/TFT-info.txt
+/data-setup.sql
