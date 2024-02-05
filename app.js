@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-const infoData = require("./info-splitter");
-infoData.dataSplitter();
+const infoData = require("./insert-data");
+infoData.insertData();
 
 const express = require('express');
 const cors = require('cors');
@@ -34,18 +34,19 @@ app.use(cors());
 app.options('*');
 
 //Env variables
-const API_BASE_URL = process.env.BASE_URL;
-const API_KEY = process.env.API_KEY;
+const SB_API_URL = process.env.SB_API_URL;
+const SB_API_KEY = process.env.SB_API_KEY;
 
 //Init cache
 let cache = apiCache.middleware;
 
 app.post('/api/userQuestion', cache('2 minutes') , async (req,res) => {
   const reqBody = req.body.sender;
+  console.log(reqBody);
   try {
-      await needle('post', `${API_BASE_URL}`, JSON.stringify({
+      // await needle('post', `${API_BASE_URL}`, JSON.stringify({
           
-      }), { headers : { 'api-key' : API_KEY, 'accept': 'application/json' } });
+      // }), { headers : { 'api-key' : API_KEY, 'accept': 'application/json' } });
       res.status(200).json({'status':'200', 'message': 'Mail send successfully', 'type': 'succeed'});   
   } catch (error) {
       res.status(500).json({error});
